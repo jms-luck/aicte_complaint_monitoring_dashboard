@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AICTE Complaint Dashboard — Project Reference</title>
+  <style>
+    :root {
+      --navy: #0f2d5c;
+      --navy-dark: #0a1f40;
+      --blue: #1a56db;
+      --blue-light: #3b82f6;
+      --accent: #f97316;
+      --accent-light: #fed7aa;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --red: #dc2626;
+      --red-light: #fee2e2;
+      --yellow: #ca8a04;
+      --yellow-light: #fef9c3;
+      --purple: #7c3aed;
+      --purple-light: #ede9fe;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+      --border-radius: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy-dark);
+      border-bottom: 3px solid var(--accent);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    nav .brand {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 0;
+      white-space: nowrap;
+    }
+    nav .brand span { color: var(--accent); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    nav ul a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.8rem;
+      padding: 0.5rem 0.75rem;
+      display: block;
+      transition: color 0.15s;
+    }
+    nav ul a:hover { color: #fff; background: rgba(255,255,255,0.07); }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, #1a3a6b 100%);
+      color: #fff;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(249,115,22,0.2);
+      border: 1px solid var(--accent);
+      color: var(--accent-light);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero h1 em { color: var(--accent); font-style: normal; }
+    .hero p {
+      font-size: 1.05rem;
+      color: #93c5fd;
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .chip {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #e2e8f0;
+      font-size: 0.78rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+    }
+
+    /* MAIN LAYOUT */
+    main { max-width: 1200px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+    section { margin-bottom: 3.5rem; }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--gray-200);
+    }
+    h2 .icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    h3 { font-size: 1.05rem; font-weight: 600; color: var(--gray-800); margin-bottom: 0.75rem; }
+
+    p { color: var(--gray-600); font-size: 0.93rem; margin-bottom: 0.5rem; }
+
+    /* CARDS */
+    .card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--border-radius);
+      padding: 1.25rem 1.5rem;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .card-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    /* TECH STACK */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .tech-card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--border-radius);
+      padding: 1rem 1.25rem;
+    }
+    .tech-card .tech-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.6rem;
+    }
+    .tech-card ul { list-style: none; }
+    .tech-card ul li {
+      font-size: 0.83rem;
+      color: var(--gray-700);
+      padding: 0.15rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+    .tech-card ul li::before { content: '•'; color: var(--blue-light); flex-shrink: 0; margin-top: 1px; }
+
+    .label-frontend { color: var(--blue); }
+    .label-backend { color: var(--green); }
+    .label-database { color: var(--navy); }
+    .label-ai { color: var(--purple); }
+    .label-infra { color: var(--accent); }
+
+    /* ARCHITECTURE TABLE */
+    .arch-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      background: #fff;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+    .arch-table th {
+      background: var(--navy);
+      color: #fff;
+      font-weight: 600;
+      padding: 0.7rem 1rem;
+      text-align: left;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .arch-table td {
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+    }
+    .arch-table tr:last-child td { border-bottom: none; }
+    .arch-table tr:hover td { background: var(--gray-50); }
+    .port-badge {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    /* ROLES */
+    .role-card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--border-radius);
+      padding: 1rem 1.25rem;
+      border-left: 4px solid var(--blue);
+    }
+    .role-card:nth-child(2) { border-left-color: var(--green); }
+    .role-card:nth-child(3) { border-left-color: var(--accent); }
+    .role-card:nth-child(4) { border-left-color: var(--purple); }
+    .role-card:nth-child(5) { border-left-color: var(--yellow); }
+    .role-card:nth-child(6) { border-left-color: #ec4899; }
+    .role-card h3 { font-size: 0.9rem; margin-bottom: 0.4rem; }
+    .role-card ul { list-style: none; }
+    .role-card ul li {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+      padding: 0.1rem 0;
+    }
+    .role-card ul li::before { content: '→ '; color: var(--gray-400); }
+
+    /* MODULES */
+    .module-card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--border-radius);
+      padding: 1.25rem 1.5rem;
+    }
+    .module-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.6rem;
+    }
+    .mod-a { background: #dbeafe; color: #1e40af; }
+    .mod-b { background: #dcfce7; color: #166534; }
+    .mod-c { background: #fef3c7; color: #92400e; }
+    .mod-d { background: #ede9fe; color: #5b21b6; }
+    .mod-e { background: #fee2e2; color: #991b1b; }
+    .mod-f { background: #cffafe; color: #155e75; }
+    .mod-g { background: #fce7f3; color: #9d174d; }
+    .mod-h { background: #f3f4f6; color: #374151; }
+    .mod-i { background: #fef9c3; color: #713f12; }
+    .mod-j { background: #d1fae5; color: #065f46; }
+
+    .module-card ul { list-style: none; margin-top: 0.5rem; }
+    .module-card ul li {
+      font-size: 0.82rem;
+      color: var(--gray-600);
+      padding: 0.2rem 0;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .module-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gray-300);
+    }
+
+    /* CODE BLOCKS */
+    .code-block {
+      background: var(--gray-900);
+      color: #e2e8f0;
+      border-radius: var(--border-radius);
+      padding: 1.2rem 1.5rem;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      position: relative;
+    }
+    .code-block .comment { color: #64748b; }
+    .code-block .cmd { color: #86efac; }
+    .code-block .flag { color: #93c5fd; }
+    .code-block .val { color: #fcd34d; }
+    .code-block .url { color: #f9a8d4; }
+
+    .code-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--gray-500);
+      margin-bottom: 0.4rem;
+    }
+
+    /* ENDPOINTS */
+    .endpoint-group { margin-bottom: 1.5rem; }
+    .endpoint-group h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--gray-500);
+      margin-bottom: 0.6rem;
+    }
+    .endpoint {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      margin-bottom: 0.3rem;
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      font-size: 0.83rem;
+    }
+    .method {
+      font-weight: 700;
+      font-size: 0.72rem;
+      font-family: monospace;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      min-width: 52px;
+      text-align: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .m-get { background: #dcfce7; color: #166534; }
+    .m-post { background: #dbeafe; color: #1e40af; }
+    .m-patch { background: #fef9c3; color: #713f12; }
+    .m-delete { background: #fee2e2; color: #991b1b; }
+    .endpoint-path { font-family: monospace; color: var(--gray-700); flex: 1; word-break: break-all; }
+    .endpoint-desc { color: var(--gray-500); font-size: 0.78rem; }
+
+    /* DEMO ACCOUNTS */
+    .accounts-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      background: #fff;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+    .accounts-table th {
+      background: var(--gray-800);
+      color: #fff;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.65rem 1rem;
+      text-align: left;
+    }
+    .accounts-table td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+    }
+    .accounts-table tr:last-child td { border-bottom: none; }
+    .accounts-table code {
+      background: var(--gray-100);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-family: monospace;
+    }
+    .role-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+    }
+    .rb-admin { background: #fee2e2; color: #991b1b; }
+    .rb-rb { background: #dbeafe; color: #1e40af; }
+    .rb-pgrc { background: #dcfce7; color: #166534; }
+    .rb-bureau { background: #fef9c3; color: #713f12; }
+    .rb-regional { background: #ede9fe; color: #5b21b6; }
+    .rb-mgmt { background: #cffafe; color: #155e75; }
+
+    /* ENV CONFIG TABLE */
+    .config-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+      background: #fff;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+    .config-table th {
+      background: var(--navy);
+      color: #fff;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.65rem 1rem;
+      text-align: left;
+    }
+    .config-table td {
+      padding: 0.55rem 1rem;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+      vertical-align: top;
+    }
+    .config-table tr:last-child td { border-bottom: none; }
+    .config-table code {
+      background: var(--gray-100);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.78rem;
+      word-break: break-all;
+    }
+    .config-table .key-col { color: var(--blue); font-family: monospace; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+
+    /* PAGES LIST */
+    .pages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.6rem;
+    }
+    .page-item {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--border-radius);
+      padding: 0.7rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.83rem;
+      color: var(--gray-700);
+    }
+    .page-num {
+      background: var(--navy);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* DB SCHEMA */
+    .schema-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .schema-chip {
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      border-radius: 6px;
+      padding: 0.35rem 0.75rem;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    /* ALERTS / NOTICES */
+    .notice {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: var(--border-radius);
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+    .notice-warn { background: var(--yellow-light); border-left: 4px solid var(--yellow); color: #713f12; }
+    .notice-info { background: #dbeafe; border-left: 4px solid var(--blue); color: #1e40af; }
+    .notice-danger { background: var(--red-light); border-left: 4px solid var(--red); color: #7f1d1d; }
+    .notice-success { background: var(--green-light); border-left: 4px solid var(--green); color: #14532d; }
+    .notice-icon { flex-shrink: 0; font-size: 1rem; }
+
+    /* TEST FILES TABLE */
+    .test-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      background: #fff;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+    .test-table th {
+      background: var(--gray-800);
+      color: #fff;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.65rem 1rem;
+      text-align: left;
+    }
+    .test-table td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+    }
+    .test-table tr:last-child td { border-bottom: none; }
+    .test-table code {
+      background: var(--gray-100);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.78rem;
+      color: var(--green);
+    }
+
+    /* E2E STEPS */
+    .step-list { list-style: none; counter-reset: steps; }
+    .step-list li {
+      counter-increment: steps;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 0.88rem;
+      color: var(--gray-700);
+    }
+    .step-list li:last-child { border-bottom: none; }
+    .step-num {
+      min-width: 28px;
+      height: 28px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-list li strong { color: var(--gray-900); }
+
+    /* LIMITATIONS */
+    .limit-list { list-style: none; }
+    .limit-list li {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 0.85rem;
+      color: var(--gray-700);
+    }
+    .limit-list li:last-child { border-bottom: none; }
+    .limit-num {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy-dark);
+      color: #94a3b8;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.8rem;
+      border-top: 3px solid var(--accent);
+    }
+    footer strong { color: #e2e8f0; }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; gap: 0.5rem; }
+      main { padding: 1.5rem 1rem 4rem; }
+      .hero { padding: 3rem 1rem 2rem; }
+      .arch-table, .accounts-table, .config-table, .test-table {
+        display: block; overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">AICTE <span>Complaint Dashboard</span></div>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#roles">Roles</a></li>
+    <li><a href="#modules">Modules</a></li>
+    <li><a href="#api">API</a></li>
+    <li><a href="#pages">Pages</a></li>
+    <li><a href="#setup">Setup</a></li>
+    <li><a href="#accounts">Accounts</a></li>
+    <li><a href="#config">Config</a></li>
+    <li><a href="#tests">Tests</a></li>
+    <li><a href="#e2e">E2E</a></li>
+    <li><a href="#deploy">Deploy</a></li>
+    <li><a href="#limits">Limits</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">DEMO DATA — Not Actual AICTE Records</div>
+  <h1>AICTE Integrated Institution<br><em>Complaint Monitoring &amp; Status Dashboard</em></h1>
+  <p>A centralised platform for managing institution-related complaints and regulatory cases across AICTE's Bureaus and Cells — with cross-bureau overlap detection, SLA monitoring, and role-based access control.</p>
+  <div class="hero-chips">
+    <span class="chip">React 18 + Vite + TypeScript</span>
+    <span class="chip">FastAPI + Python 3.12</span>
+    <span class="chip">PostgreSQL 16</span>
+    <span class="chip">JWT Auth</span>
+    <span class="chip">RapidFuzz Overlap Detection</span>
+    <span class="chip">APScheduler</span>
+    <span class="chip">Docker Compose</span>
+    <span class="chip">Azure Blob Storage</span>
+  </div>
+</div>
+
+<main>
+
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <h2>
+      <span class="icon" style="background:#dbeafe;">📋</span>
+      Project Overview
+    </h2>
+    <div class="card" style="margin-bottom:1rem;">
+      <p>The platform centralises institution-related complaints and regulatory cases across AICTE's internal departments — the Regulation Bureau (RB), Public Grievance Redressal Cell (PGRC), regional offices, and other Bureaus/Cells.</p>
+      <p style="margin-top:0.5rem;">Primary goals: prevent duplicated efforts, detect potentially overlapping cases, improve interdepartmental coordination, track case movement, monitor deadlines, and give management consolidated reports.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Unified Complaint Intake</h3>
+        <p>Accept complaints from portal, email, letter, RTI, and court orders. Centralise all sources into a single tracking system.</p>
+      </div>
+      <div class="card">
+        <h3>Cross-Bureau Overlap Detection</h3>
+        <p>Detect potentially related cases across departments using exact ID matching, fuzzy name matching (RapidFuzz), and optional semantic similarity (Sentence Transformers).</p>
+      </div>
+      <div class="card">
+        <h3>SLA &amp; Deadline Monitoring</h3>
+        <p>Configurable SLA rules per category, priority, and bureau. Background scheduler triggers overdue alerts, approaching-deadline reminders, and escalation notifications.</p>
+      </div>
+      <div class="card">
+        <h3>Role-Based Access Control</h3>
+        <p>Six user roles with backend-enforced permissions. Every protected endpoint checks authorization — hiding a button is not sufficient.</p>
+      </div>
+      <div class="card">
+        <h3>Real-Time Dashboard &amp; Analytics</h3>
+        <p>KPI cards, trend charts, workload distribution, ageing analysis, and overlap alert tracking — all driven from live database queries.</p>
+      </div>
+      <div class="card">
+        <h3>CSV / JSON Reports</h3>
+        <p>Export institution-wise history, ageing analysis, bureau workload, overlap reports, and more — with date-range and bureau filters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section id="stack">
+    <h2>
+      <span class="icon" style="background:#dcfce7;">⚙️</span>
+      Architecture &amp; Technology Stack
+    </h2>
+    <table class="arch-table" style="margin-bottom:1.5rem;">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Technology</th>
+          <th>Port</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Frontend</td><td>React 18 + Vite + TypeScript + Tailwind CSS</td><td><span class="port-badge">5173</span></td><td>SPA user interface</td></tr>
+        <tr><td>Backend API</td><td>Python 3.12 + FastAPI + SQLAlchemy 2</td><td><span class="port-badge">8000</span></td><td>RESTful API + business logic</td></tr>
+        <tr><td>Database</td><td>PostgreSQL 16</td><td><span class="port-badge">5432</span></td><td>Primary data store</td></tr>
+        <tr><td>Background Jobs</td><td>APScheduler (in-process)</td><td>—</td><td>SLA checks, deadline notifications</td></tr>
+        <tr><td>Document Storage</td><td>Local filesystem (dev) / Azure Blob Storage (prod)</td><td>—</td><td>Supporting documents</td></tr>
+        <tr><td>Overlap Matching</td><td>RapidFuzz + Sentence Transformers (optional)</td><td>—</td><td>Cross-bureau case correlation</td></tr>
+      </tbody>
+    </table>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-label label-frontend">Frontend</div>
+        <ul>
+          <li>React 18 with Vite</li>
+          <li>TypeScript</li>
+          <li>Tailwind CSS</li>
+          <li>shadcn/ui components</li>
+          <li>React Router</li>
+          <li>TanStack Query</li>
+          <li>Recharts (visualizations)</li>
+          <li>React Hook Form + Zod</li>
+          <li>Lucide React icons</li>
+        </ul>
+      </div>
+      <div class="tech-card">
+        <div class="tech-label label-backend">Backend</div>
+        <ul>
+          <li>Python 3.12</li>
+          <li>FastAPI</li>
+          <li>Pydantic (validation)</li>
+          <li>SQLAlchemy 2.x ORM</li>
+          <li>Alembic (migrations)</li>
+          <li>JWT authentication</li>
+          <li>Argon2 / bcrypt hashing</li>
+          <li>Pytest + coverage</li>
+          <li>Uvicorn ASGI server</li>
+        </ul>
+      </div>
+      <div class="tech-card">
+        <div class="tech-label label-database">Database</div>
+        <ul>
+          <li>PostgreSQL 16</li>
+          <li>Foreign keys + indexes</li>
+          <li>Unique constraints</li>
+          <li>Database transactions</li>
+          <li>UUID primary keys</li>
+          <li>Human-readable case IDs</li>
+          <li>Enum types for statuses</li>
+          <li>Alembic migration scripts</li>
+        </ul>
+      </div>
+      <div class="tech-card">
+        <div class="tech-label label-ai">Matching &amp; AI</div>
+        <ul>
+          <li>RapidFuzz (name fuzzy match)</li>
+          <li>Sentence Transformers (optional)</li>
+          <li>Cosine similarity scoring</li>
+          <li>Configurable thresholds</li>
+          <li>Rule-based overlap engine</li>
+          <li>4-stage matching pipeline</li>
+          <li>Alert deduplication logic</li>
+        </ul>
+      </div>
+      <div class="tech-card">
+        <div class="tech-label label-infra">Infrastructure</div>
+        <ul>
+          <li>Docker + Docker Compose</li>
+          <li>.env environment config</li>
+          <li>Azure App Service (prod)</li>
+          <li>Azure Blob Storage (prod)</li>
+          <li>Azure PostgreSQL (prod)</li>
+          <li>Swagger / OpenAPI docs</li>
+          <li>APScheduler (background)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- USER ROLES -->
+  <section id="roles">
+    <h2>
+      <span class="icon" style="background:#ede9fe;">👥</span>
+      User Roles &amp; Permissions
+    </h2>
+    <div class="card-grid">
+      <div class="role-card">
+        <h3>System Administrator</h3>
+        <ul>
+          <li>Manage users, roles, and Bureau/Cell config</li>
+          <li>Manage institution records and categories</li>
+          <li>Configure SLA settings and matching thresholds</li>
+          <li>View audit logs and system-wide statistics</li>
+          <li>Configure notification rules</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <h3>RB Officer</h3>
+        <ul>
+          <li>View and process cases assigned to RB</li>
+          <li>Update case status, remarks, assignments</li>
+          <li>Add action history entries</li>
+          <li>View authorized related-case information</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <h3>PGRC Officer</h3>
+        <ul>
+          <li>View and process PGRC-assigned cases</li>
+          <li>Record grievance actions and request documents</li>
+          <li>Update case progress and status</li>
+          <li>Review and respond to overlap alerts</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <h3>Bureau Officer</h3>
+        <ul>
+          <li>Manage cases within authorized Bureau/Cell</li>
+          <li>View institution profiles</li>
+          <li>Record actions and update statuses</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <h3>Regional Office User</h3>
+        <ul>
+          <li>View cases associated with assigned region</li>
+          <li>Manage authorized regional cases</li>
+          <li>View region-wise workload reports</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <h3>Senior Management</h3>
+        <ul>
+          <li>Access consolidated dashboards</li>
+          <li>View pending-case reports and escalations</li>
+          <li>Access workload analytics</li>
+          <li>View institution-wise case histories</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULES -->
+  <section id="modules">
+    <h2>
+      <span class="icon" style="background:#fef3c7;">🧩</span>
+      Core Application Modules
+    </h2>
+    <div class="card-grid">
+      <div class="module-card">
+        <span class="module-tag mod-a">Module A</span>
+        <h3>Authentication &amp; User Management</h3>
+        <ul>
+          <li>Login / logout with JWT tokens</li>
+          <li>Secure password hashing (Argon2/bcrypt)</li>
+          <li>Role-based access control (RBAC)</li>
+          <li>Session expiration and token validation</li>
+          <li>User creation, editing, activation, deactivation</li>
+          <li>Bureau/Cell and regional assignments</li>
+          <li>Password reset workflow</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <span class="module-tag mod-b">Module B</span>
+        <h3>Institution Management</h3>
+        <ul>
+          <li>AICTE Permanent ID (unique)</li>
+          <li>Institution name + alternative names/abbreviations</li>
+          <li>Address, state, district, region, type</li>
+          <li>Active/inactive status</li>
+          <li>Full-text search and filtering</li>
+          <li>Institution profile with consolidated complaint history</li>
+          <li>Prevent automatic duplicate institution creation</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <span class="module-tag mod-c">Module C</span>
+        <h3>Complaint &amp; Case Management</h3>
+        <ul>
+          <li>Unique complaint and case IDs</li>
+          <li>Status lifecycle: Received → Disposed → Closed</li>
+          <li>Assign, reassign, transfer between bureaus</li>
+          <li>Add remarks, actions, and documents</li>
+          <li>Configurable status transitions (backend validated)</li>
+          <li>Case reopening with authorization</li>
+          <li>Search, sort, filter, paginate</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <span class="module-tag mod-d">Module D</span>
+        <h3>Institution-Centric Dashboard</h3>
+        <ul>
+          <li>KPI cards: total, active, pending, overdue, overlapping</li>
+          <li>Cases by status and Bureau/Cell charts</li>
+          <li>Monthly intake and disposal trends</li>
+          <li>Pending-case ageing analysis</li>
+          <li>Regional workload distribution</li>
+          <li>Unified institution table with bureau breakdown</li>
+          <li>All metrics from live database queries</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <span class="module-tag mod-e">Module E</span>
+        <h3>Cross-Bureau Overlap Detection</h3>
+        <ul>
+          <li><strong>Stage 1:</strong> Exact AICTE Permanent ID / case ref matching</li>
+          <li><strong>Stage 2:</strong> RapidFuzz institution-name fuzzy matching</li>
+          <li><strong>Stage 3:</strong> Complaint text + optional semantic similarity</li>
+          <li><strong>Stage 4:</strong> Overlap classification (same/possible/related/false)</li>
+          <li>Alert lifecycle with review workflow</li>
+          <li>No automatic case merging — human review required</li>
+          <li>Deduplication of active alerts for same candidate pair</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <span class="module-tag mod-f">Module F</span>
+        <h3>Related-Case Coordination Workspace</h3>
+        <ul>
+          <li>Unified view of linked cases across departments</li>
+          <li>Institution identity and case reference side-by-side</li>
+          <li>Responsible bureau, assigned officer, status per case</li>
+          <li>Coordination notes and interdepartmental review requests</li>
+          <li>All coordination decisions recorded in audit trail</li>
+          <li>Original case records remain independent</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <span class="module-tag mod-g">Module G</span>
+        <h3>Workflow &amp; Audit Trail</h3>
+        <ul>
+          <li>Chronological history for all important operations</li>
+          <li>Entity, action, actor, timestamp per entry</li>
+          <li>Before/after values for status changes</li>
+          <li>Server-generated timestamps (immutable by users)</li>
+          <li>Action history stored separately from case state</li>
+          <li>Database transactions for case + audit event atomicity</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <span class="module-tag mod-h">Module H</span>
+        <h3>SLA Monitoring &amp; Notifications</h3>
+        <ul>
+          <li>Configurable SLA rules (category, priority, bureau)</li>
+          <li>Pending reminders, deadline alerts, overdue alerts</li>
+          <li>Escalation and unreviewed overlap reminders</li>
+          <li>Assignment notifications</li>
+          <li>Idempotent scheduled processing (no duplicate notifications)</li>
+          <li>In-app notification center with unread counts</li>
+          <li>Optional SMTP email delivery</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <span class="module-tag mod-i">Module I</span>
+        <h3>Search &amp; Filtering</h3>
+        <ul>
+          <li>Institution name, AICTE ID, complaint/case ID</li>
+          <li>Bureau/Cell, region, category, status, priority</li>
+          <li>Assigned officer, overlap review status, date range</li>
+          <li>Overdue status filter</li>
+          <li>Backend-powered with pagination + DB indexes</li>
+          <li>Parameterized ORM queries (SQL injection-safe)</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <span class="module-tag mod-j">Module J</span>
+        <h3>Reports &amp; Analytics</h3>
+        <ul>
+          <li>Institution-wise complaint history</li>
+          <li>Bureau/Cell workload and regional distribution</li>
+          <li>Status-wise case counts and disposal rates</li>
+          <li>Pending-case ageing and overdue cases</li>
+          <li>Monthly and quarterly trends</li>
+          <li>Overlap alerts and review outcomes</li>
+          <li>CSV and JSON export with applied filters</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATABASE SCHEMA -->
+  <section id="database">
+    <h2>
+      <span class="icon" style="background:#cffafe;">🗄️</span>
+      Database Schema (PostgreSQL)
+    </h2>
+    <p style="margin-bottom:1rem;">Normalized tables with foreign keys, indexes, unique constraints, and timestamps. UUIDs for internal records, human-readable IDs for complaints/cases.</p>
+    <div class="schema-chips">
+      <span class="schema-chip">users</span>
+      <span class="schema-chip">roles</span>
+      <span class="schema-chip">bureaus</span>
+      <span class="schema-chip">regions</span>
+      <span class="schema-chip">institutions</span>
+      <span class="schema-chip">institution_aliases</span>
+      <span class="schema-chip">complaints</span>
+      <span class="schema-chip">cases</span>
+      <span class="schema-chip">case_assignments</span>
+      <span class="schema-chip">case_actions</span>
+      <span class="schema-chip">related_cases</span>
+      <span class="schema-chip">overlap_alerts</span>
+      <span class="schema-chip">overlap_reviews</span>
+      <span class="schema-chip">documents</span>
+      <span class="schema-chip">notifications</span>
+      <span class="schema-chip">audit_logs</span>
+      <span class="schema-chip">sla_rules</span>
+    </div>
+  </section>
+
+  <!-- API ENDPOINTS -->
+  <section id="api">
+    <h2>
+      <span class="icon" style="background:#f0fdf4;">🔌</span>
+      API Endpoints
+    </h2>
+    <div class="notice notice-info">
+      <span class="notice-icon">ℹ️</span>
+      <span>Interactive docs: <strong>http://localhost:8000/api/docs</strong> (Swagger UI) &nbsp;|&nbsp; <strong>http://localhost:8000/api/redoc</strong> (ReDoc) &nbsp;|&nbsp; OpenAPI JSON: <strong>/api/openapi.json</strong></span>
+    </div>
+
+    <div class="endpoint-group">
+      <h3>Authentication</h3>
+      <div class="endpoint"><span class="method m-post">POST</span><span class="endpoint-path">/api/v1/auth/login</span><span class="endpoint-desc">Login and receive JWT tokens</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/auth/me</span><span class="endpoint-desc">Get current user profile</span></div>
+      <div class="endpoint"><span class="method m-post">POST</span><span class="endpoint-path">/api/v1/auth/logout</span><span class="endpoint-desc">Logout / invalidate session</span></div>
+    </div>
+
+    <div class="endpoint-group">
+      <h3>Institutions</h3>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/institutions</span><span class="endpoint-desc">List and search institutions</span></div>
+      <div class="endpoint"><span class="method m-post">POST</span><span class="endpoint-path">/api/v1/institutions</span><span class="endpoint-desc">Create institution (admin/officer)</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/institutions/{institution_id}</span><span class="endpoint-desc">Get institution details</span></div>
+      <div class="endpoint"><span class="method m-patch">PATCH</span><span class="endpoint-path">/api/v1/institutions/{institution_id}</span><span class="endpoint-desc">Update institution</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/institutions/{institution_id}/cases</span><span class="endpoint-desc">Institution complaint history</span></div>
+    </div>
+
+    <div class="endpoint-group">
+      <h3>Complaints</h3>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/complaints</span><span class="endpoint-desc">List complaints (with filters)</span></div>
+      <div class="endpoint"><span class="method m-post">POST</span><span class="endpoint-path">/api/v1/complaints</span><span class="endpoint-desc">Register new complaint</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/complaints/{complaint_id}</span><span class="endpoint-desc">Complaint details</span></div>
+      <div class="endpoint"><span class="method m-patch">PATCH</span><span class="endpoint-path">/api/v1/complaints/{complaint_id}</span><span class="endpoint-desc">Update permitted complaint fields</span></div>
+    </div>
+
+    <div class="endpoint-group">
+      <h3>Cases</h3>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/cases</span><span class="endpoint-desc">List cases (paginated, filtered)</span></div>
+      <div class="endpoint"><span class="method m-post">POST</span><span class="endpoint-path">/api/v1/cases</span><span class="endpoint-desc">Create case from complaint</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/cases/{case_id}</span><span class="endpoint-desc">Case details</span></div>
+      <div class="endpoint"><span class="method m-patch">PATCH</span><span class="endpoint-path">/api/v1/cases/{case_id}/status</span><span class="endpoint-desc">Update case status (validated transitions)</span></div>
+      <div class="endpoint"><span class="method m-post">POST</span><span class="endpoint-path">/api/v1/cases/{case_id}/assign</span><span class="endpoint-desc">Assign case to officer</span></div>
+      <div class="endpoint"><span class="method m-post">POST</span><span class="endpoint-path">/api/v1/cases/{case_id}/transfer</span><span class="endpoint-desc">Transfer to another bureau</span></div>
+      <div class="endpoint"><span class="method m-post">POST</span><span class="endpoint-path">/api/v1/cases/{case_id}/actions</span><span class="endpoint-desc">Add action/remark to case</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/cases/{case_id}/history</span><span class="endpoint-desc">Case audit history</span></div>
+    </div>
+
+    <div class="endpoint-group">
+      <h3>Overlap Detection</h3>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/overlaps</span><span class="endpoint-desc">List overlap alerts</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/overlaps/{overlap_id}</span><span class="endpoint-desc">Overlap alert details</span></div>
+      <div class="endpoint"><span class="method m-post">POST</span><span class="endpoint-path">/api/v1/overlaps/{overlap_id}/review</span><span class="endpoint-desc">Submit review decision</span></div>
+      <div class="endpoint"><span class="method m-post">POST</span><span class="endpoint-path">/api/v1/cases/{case_id}/related-cases</span><span class="endpoint-desc">Link related cases</span></div>
+    </div>
+
+    <div class="endpoint-group">
+      <h3>Dashboard &amp; Reports</h3>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/dashboard/summary</span><span class="endpoint-desc">KPI summary counts</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/dashboard/trends</span><span class="endpoint-desc">Monthly intake/disposal trends</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/dashboard/workload</span><span class="endpoint-desc">Bureau/regional workload</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/reports/institutions</span><span class="endpoint-desc">Institution report (JSON or CSV)</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/reports/ageing</span><span class="endpoint-desc">Pending-case ageing analysis</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/reports/overlaps</span><span class="endpoint-desc">Overlap alert report</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/notifications</span><span class="endpoint-desc">User notifications</span></div>
+    </div>
+
+    <div class="endpoint-group">
+      <h3>Documents</h3>
+      <div class="endpoint"><span class="method m-post">POST</span><span class="endpoint-path">/api/v1/cases/{case_id}/documents</span><span class="endpoint-desc">Upload supporting document</span></div>
+      <div class="endpoint"><span class="method m-get">GET</span><span class="endpoint-path">/api/v1/documents/{document_id}/download</span><span class="endpoint-desc">Download document (authorized only)</span></div>
+    </div>
+  </section>
+
+  <!-- FRONTEND PAGES -->
+  <section id="pages">
+    <h2>
+      <span class="icon" style="background:#fce7f3;">🖥️</span>
+      Frontend Pages
+    </h2>
+    <div class="pages-grid">
+      <div class="page-item"><span class="page-num">1</span>Login Page</div>
+      <div class="page-item"><span class="page-num">2</span>Main Dashboard</div>
+      <div class="page-item"><span class="page-num">3</span>Institution Directory</div>
+      <div class="page-item"><span class="page-num">4</span>Institution Profile &amp; History</div>
+      <div class="page-item"><span class="page-num">5</span>Complaint Registration</div>
+      <div class="page-item"><span class="page-num">6</span>Complaint &amp; Case Listing</div>
+      <div class="page-item"><span class="page-num">7</span>Case Details &amp; Action Timeline</div>
+      <div class="page-item"><span class="page-num">8</span>Overlap Review Center</div>
+      <div class="page-item"><span class="page-num">9</span>Related-Case Coordination</div>
+      <div class="page-item"><span class="page-num">10</span>Notifications Center</div>
+      <div class="page-item"><span class="page-num">11</span>Reports &amp; Analytics</div>
+      <div class="page-item"><span class="page-num">12</span>User &amp; Role Administration</div>
+      <div class="page-item"><span class="page-num">13</span>Bureau/Cell &amp; Region Config</div>
+      <div class="page-item"><span class="page-num">14</span>SLA &amp; Application Settings</div>
+      <div class="page-item"><span class="page-num">15</span>Audit Log Viewer</div>
+    </div>
+  </section>
+
+  <!-- SETUP & COMMANDS -->
+  <section id="setup">
+    <h2>
+      <span class="icon" style="background:#f0fdf4;">🚀</span>
+      Setup &amp; Commands
+    </h2>
+
+    <h3 style="margin-bottom:0.5rem;">Option A — Docker (Recommended)</h3>
+    <div class="code-label">Quick Start</div>
+    <div class="code-block" style="margin-bottom:1.5rem;"><span class="comment"># Clone the repository</span>
+<span class="cmd">git clone</span> &lt;repo-url&gt;
+<span class="cmd">cd</span> aicte-complaint-dashboard
+
+<span class="comment"># Copy environment file and set SECRET_KEY</span>
+<span class="cmd">cp</span> .env .env.local
+<span class="comment"># Edit .env — set SECRET_KEY to a random 32+ character string</span>
+
+<span class="comment"># Start all services</span>
+<span class="cmd">docker compose up -d</span>
+
+<span class="comment"># Wait ~30 seconds, then seed demo data</span>
+<span class="cmd">docker compose exec backend</span> python -m app.db.seed
+
+<span class="comment"># Verify services are healthy</span>
+<span class="cmd">bash</span> scripts/verify_setup.sh
+
+<span class="comment"># Access the application</span>
+<span class="url"># Frontend:  http://localhost:5173</span>
+<span class="url"># API docs:  http://localhost:8000/api/docs</span></div>
+
+    <h3 style="margin-bottom:0.5rem;">Option B — Local Development (Backend)</h3>
+    <div class="code-label">Backend Setup</div>
+    <div class="code-block" style="margin-bottom:1.5rem;"><span class="cmd">cd</span> backend
+
+<span class="comment"># Create and activate virtual environment</span>
+<span class="cmd">python -m venv</span> venv
+<span class="cmd">source</span> venv/bin/activate        <span class="comment"># Windows: venv\Scripts\activate</span>
+<span class="comment"># OR using conda:</span>
+<span class="cmd">conda activate</span> ps2
+
+<span class="comment"># Install all dependencies</span>
+<span class="cmd">pip install -r</span> requirements.txt
+
+<span class="comment"># Apply database migrations</span>
+<span class="cmd">alembic upgrade head</span>
+
+<span class="comment"># Seed demo data (development only)</span>
+<span class="cmd">python -m app.db.seed</span>
+
+<span class="comment"># Start the FastAPI development server</span>
+<span class="cmd">uvicorn</span> app.main:app <span class="flag">--reload</span> <span class="flag">--host</span> 0.0.0.0 <span class="flag">--port</span> 8000
+
+<span class="url"># API: http://localhost:8000</span>
+<span class="url"># Docs: http://localhost:8000/api/docs</span></div>
+
+    <div class="code-label">Windows Quick Start (batch script)</div>
+    <div class="code-block" style="margin-bottom:1.5rem;"><span class="comment"># From the aicte-complaint-dashboard directory:</span>
+<span class="cmd">start_backend.bat</span>     <span class="comment"># starts backend via conda activate ps2</span></div>
+
+    <h3 style="margin-bottom:0.5rem;">Option B — Local Development (Frontend)</h3>
+    <div class="code-label">Frontend Setup</div>
+    <div class="code-block" style="margin-bottom:1.5rem;"><span class="cmd">cd</span> frontend
+
+<span class="comment"># Install dependencies</span>
+<span class="cmd">npm install</span>
+
+<span class="comment"># Start Vite development server</span>
+<span class="cmd">npm run dev</span>
+
+<span class="url"># Frontend: http://localhost:5173</span>
+
+<span class="comment"># Windows quick start:</span>
+<span class="cmd">start_frontend.bat</span></div>
+
+    <h3 style="margin-bottom:0.5rem;">Other Useful Commands</h3>
+    <div class="code-block"><span class="comment"># Build frontend for production</span>
+<span class="cmd">npm run build</span>
+
+<span class="comment"># Create a new Alembic migration</span>
+<span class="cmd">alembic revision</span> <span class="flag">--autogenerate</span> -m <span class="val">"description"</span>
+
+<span class="comment"># Roll back last migration</span>
+<span class="cmd">alembic downgrade -1</span>
+
+<span class="comment"># Check migration history</span>
+<span class="cmd">alembic history</span>
+
+<span class="comment"># View Docker logs</span>
+<span class="cmd">docker compose logs -f backend</span>
+<span class="cmd">docker compose logs -f frontend</span>
+
+<span class="comment"># Stop all Docker services</span>
+<span class="cmd">docker compose down</span>
+
+<span class="comment"># Rebuild Docker images</span>
+<span class="cmd">docker compose up --build -d</span></div>
+  </section>
+
+  <!-- DEMO ACCOUNTS -->
+  <section id="accounts">
+    <h2>
+      <span class="icon" style="background:#dcfce7;">🔑</span>
+      Demo Accounts (Development Only)
+    </h2>
+    <div class="notice notice-warn">
+      <span class="notice-icon">⚠️</span>
+      <span>All demo accounts use the password <strong>Demo@1234</strong>. Remove all demo accounts before deploying to production.</span>
+    </div>
+    <table class="accounts-table">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Bureau Access</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>admin@aicte.gov.in</code></td>
+          <td><span class="role-badge rb-admin">System Administrator</span></td>
+          <td>All Bureaus</td>
+          <td><code>Demo@1234</code></td>
+        </tr>
+        <tr>
+          <td><code>rb.officer@aicte.gov.in</code></td>
+          <td><span class="role-badge rb-rb">RB Officer</span></td>
+          <td>Regional Bureau</td>
+          <td><code>Demo@1234</code></td>
+        </tr>
+        <tr>
+          <td><code>pgrc.officer@aicte.gov.in</code></td>
+          <td><span class="role-badge rb-pgrc">PGRC Officer</span></td>
+          <td>PGRC Cell</td>
+          <td><code>Demo@1234</code></td>
+        </tr>
+        <tr>
+          <td><code>ab.officer@aicte.gov.in</code></td>
+          <td><span class="role-badge rb-bureau">Bureau Officer</span></td>
+          <td>Approval Bureau</td>
+          <td><code>Demo@1234</code></td>
+        </tr>
+        <tr>
+          <td><code>north.regional@aicte.gov.in</code></td>
+          <td><span class="role-badge rb-regional">Regional Officer</span></td>
+          <td>Northern Region</td>
+          <td><code>Demo@1234</code></td>
+        </tr>
+        <tr>
+          <td><code>management@aicte.gov.in</code></td>
+          <td><span class="role-badge rb-mgmt">Senior Management</span></td>
+          <td>Read-all</td>
+          <td><code>Demo@1234</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CONFIGURATION REFERENCE -->
+  <section id="config">
+    <h2>
+      <span class="icon" style="background:#fef3c7;">🔧</span>
+      Configuration Reference (.env)
+    </h2>
+    <div class="notice notice-danger">
+      <span class="notice-icon">🔒</span>
+      <span>Never commit <strong>.env</strong> with real credentials. Use <strong>.env.example</strong> as a template. Set <code>SECRET_KEY</code> to a cryptographically random 64-character string in production.</span>
+    </div>
+    <table class="config-table">
+      <thead>
+        <tr>
+          <th>Variable</th>
+          <th>Default (Development)</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="key-col">DATABASE_URL</td><td><code>postgresql://aicte_user:aicte_pass@localhost:5432/aicte_db</code></td><td>PostgreSQL connection string</td></tr>
+        <tr><td class="key-col">SECRET_KEY</td><td><em>(dev placeholder)</em></td><td>JWT signing key — change in production</td></tr>
+        <tr><td class="key-col">ALGORITHM</td><td><code>HS256</code></td><td>JWT signing algorithm</td></tr>
+        <tr><td class="key-col">ACCESS_TOKEN_EXPIRE_MINUTES</td><td><code>480</code></td><td>Access token lifetime (8 hours)</td></tr>
+        <tr><td class="key-col">REFRESH_TOKEN_EXPIRE_DAYS</td><td><code>7</code></td><td>Refresh token lifetime</td></tr>
+        <tr><td class="key-col">BACKEND_CORS_ORIGINS</td><td><code>["http://localhost:5173"]</code></td><td>Allowed CORS origins</td></tr>
+        <tr><td class="key-col">USE_LOCAL_STORAGE</td><td><code>true</code></td><td>Use local filesystem for document uploads</td></tr>
+        <tr><td class="key-col">LOCAL_STORAGE_PATH</td><td><code>./local_storage</code></td><td>Path for local file uploads</td></tr>
+        <tr><td class="key-col">AZURE_STORAGE_CONNECTION_STRING</td><td><em>(empty)</em></td><td>Azure Blob Storage connection string</td></tr>
+        <tr><td class="key-col">AZURE_STORAGE_CONTAINER_NAME</td><td><code>aicte-documents</code></td><td>Azure container name</td></tr>
+        <tr><td class="key-col">ENVIRONMENT</td><td><code>development</code></td><td><code>development</code> or <code>production</code></td></tr>
+        <tr><td class="key-col">LOG_LEVEL</td><td><code>INFO</code></td><td>Logging level</td></tr>
+        <tr><td class="key-col">FRONTEND_URL</td><td><code>http://localhost:5173</code></td><td>Used in email notification links</td></tr>
+        <tr><td class="key-col">SMTP_HOST</td><td><em>(empty)</em></td><td>SMTP server — leave empty to disable email</td></tr>
+        <tr><td class="key-col">SMTP_PORT</td><td><code>587</code></td><td>SMTP port</td></tr>
+        <tr><td class="key-col">SMTP_USER</td><td><em>(empty)</em></td><td>SMTP username</td></tr>
+        <tr><td class="key-col">SMTP_PASSWORD</td><td><em>(empty)</em></td><td>SMTP password</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- TESTING -->
+  <section id="tests">
+    <h2>
+      <span class="icon" style="background:#dcfce7;">🧪</span>
+      Testing
+    </h2>
+    <div class="notice notice-success">
+      <span class="notice-icon">✅</span>
+      <span>Tests use an in-memory SQLite database — no PostgreSQL installation required to run the test suite.</span>
+    </div>
+
+    <div class="code-label">Running Tests</div>
+    <div class="code-block" style="margin-bottom:1.5rem;"><span class="cmd">cd</span> backend
+
+<span class="comment"># Activate virtual environment</span>
+<span class="cmd">source</span> venv/bin/activate   <span class="comment"># Windows: venv\Scripts\activate</span>
+
+<span class="comment"># Run all tests with coverage report</span>
+<span class="cmd">pytest</span> tests/ <span class="flag">-v</span> <span class="flag">--cov=app</span> <span class="flag">--cov-report=term-missing</span>
+
+<span class="comment"># Run a specific test file</span>
+<span class="cmd">pytest</span> tests/test_auth.py <span class="flag">-v</span>
+
+<span class="comment"># Run with short output</span>
+<span class="cmd">pytest</span> tests/ <span class="flag">-q</span></div>
+
+    <table class="test-table">
+      <thead>
+        <tr><th>Test File</th><th>Coverage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>test_auth.py</code></td><td>Login, /me endpoint, change password</td></tr>
+        <tr><td><code>test_institutions.py</code></td><td>Institution CRUD, search, access control, duplicate-ID prevention</td></tr>
+        <tr><td><code>test_complaints.py</code></td><td>Complaint creation, numbering, bureau filtering</td></tr>
+        <tr><td><code>test_cases.py</code></td><td>Case lifecycle, assignments, transfers, status transitions</td></tr>
+        <tr><td><code>test_overlap.py</code></td><td>Fuzzy matching, alert creation, deduplication, review workflow</td></tr>
+        <tr><td><code>test_dashboard.py</code></td><td>Summary counts, trends, overdue detection</td></tr>
+        <tr><td><code>test_notifications.py</code></td><td>Assignment notifications, mark-read, deadline alerts</td></tr>
+        <tr><td><code>test_search_pagination.py</code></td><td>Pagination correctness, filter accuracy</td></tr>
+        <tr><td><code>test_reports.py</code></td><td>CSV export, date filters, ageing report</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- END-TO-END ACCEPTANCE -->
+  <section id="e2e">
+    <h2>
+      <span class="icon" style="background:#ede9fe;">✅</span>
+      End-to-End Acceptance Scenario
+    </h2>
+    <p style="margin-bottom:1rem;">The project is not complete until this full workflow succeeds:</p>
+    <div class="card">
+      <ol class="step-list">
+        <li><span class="step-num">1</span><div>Login as <strong>admin@aicte.gov.in</strong> and create an institution with a verified AICTE Permanent ID.</div></li>
+        <li><span class="step-num">2</span><div>As <strong>PGRC Officer</strong>, register a fee-refund complaint for that institution. Create a case and mark it <strong>Under Process</strong>.</div></li>
+        <li><span class="step-num">3</span><div>As <strong>RB Officer</strong>, register a separate complaint for the same institution from a different bureau.</div></li>
+        <li><span class="step-num">4</span><div>The system detects the common institution and generates a <em>"Potential Overlapping Cases — Coordination Required"</em> alert in the overlap review center.</div></li>
+        <li><span class="step-num">5</span><div>An authorized official <strong>compares the two cases side by side</strong> and records a review decision (confirmed_related).</div></li>
+        <li><span class="step-num">6</span><div>The official <strong>links the cases as related</strong> — both cases retain their independent statuses and histories.</div></li>
+        <li><span class="step-num">7</span><div>The <strong>dashboard updates</strong> case counts and overlap statistics from the database.</div></li>
+        <li><span class="step-num">8</span><div>An officer records an action — the system appends an <strong>audit-history entry</strong>.</div></li>
+        <li><span class="step-num">9</span><div>A case approaching its configured deadline generates an appropriate <strong>SLA notification</strong>.</div></li>
+        <li><span class="step-num">10</span><div>An <strong>unauthorized user</strong> is prevented from accessing restricted case details and documents.</div></li>
+        <li><span class="step-num">11</span><div>An officer exports a <strong>filtered CSV report</strong> — the export reflects only the records matching the applied filters.</div></li>
+      </ol>
+    </div>
+    <div class="notice notice-warn" style="margin-top:1rem;">
+      <span class="notice-icon">⚠️</span>
+      <span>Two complaints about the same institution must <strong>never</strong> be automatically treated as duplicates. Cases remain independent unless an authorized workflow explicitly links them.</span>
+    </div>
+  </section>
+
+  <!-- PRODUCTION DEPLOYMENT -->
+  <section id="deploy">
+    <h2>
+      <span class="icon" style="background:#fef9c3;">🌐</span>
+      Production Deployment (Azure)
+    </h2>
+    <div class="card-grid" style="margin-bottom:1.5rem;">
+      <div class="card">
+        <h3>1. Database</h3>
+        <p>Provision Azure Database for PostgreSQL Flexible Server. Enable automated daily backups with 7-day retention minimum.</p>
+      </div>
+      <div class="card">
+        <h3>2. App Service</h3>
+        <p>Create Azure App Service (Python 3.12, B2 or higher). Configure environment variables via App Service Configuration.</p>
+      </div>
+      <div class="card">
+        <h3>3. Document Storage</h3>
+        <p>Create Azure Blob Storage container. Set <code>USE_LOCAL_STORAGE=false</code> and provide the connection string.</p>
+      </div>
+      <div class="card">
+        <h3>4. Secret Management</h3>
+        <p>Store <code>SECRET_KEY</code>, DB credentials, and SMTP passwords in Azure Key Vault. Reference them as App Service env variables.</p>
+      </div>
+    </div>
+
+    <div class="code-label">Post-deploy commands</div>
+    <div class="code-block"><span class="comment"># Run database migrations</span>
+<span class="cmd">alembic upgrade head</span>
+
+<span class="comment"># Seed initial data (development/staging only)</span>
+<span class="cmd">python -m app.db.seed</span>
+
+<span class="comment"># Required environment variables in production</span>
+<span class="val">DATABASE_URL</span>=postgresql://...   <span class="comment"># Azure PostgreSQL connection string</span>
+<span class="val">SECRET_KEY</span>=&lt;64-char random string&gt;
+<span class="val">AZURE_STORAGE_CONNECTION_STRING</span>=DefaultEndpointsProtocol=https;...
+<span class="val">ENVIRONMENT</span>=production
+<span class="val">USE_LOCAL_STORAGE</span>=false</div>
+
+    <div class="notice notice-info" style="margin-top:1rem;">
+      <span class="notice-icon">🔒</span>
+      <span>In production, terminate TLS at the load balancer or App Service level. Never run FastAPI directly on port 443. Use <code>--workers 1</code> with gunicorn if using APScheduler (in-process), or migrate to Celery for multi-worker deployments.</span>
+    </div>
+  </section>
+
+  <!-- KNOWN LIMITATIONS -->
+  <section id="limits">
+    <h2>
+      <span class="icon" style="background:#fee2e2;">⚠️</span>
+      Known Limitations
+    </h2>
+    <div class="card">
+      <ul class="limit-list">
+        <li>
+          <span class="limit-num">1</span>
+          <div><strong>Semantic matching disabled by default.</strong> The Sentence Transformers model is not downloaded automatically. To enable: set <code>use_semantic=True</code> in <code>MatchConfig</code> and pre-download the model in production.</div>
+        </li>
+        <li>
+          <span class="limit-num">2</span>
+          <div><strong>Email notifications require SMTP configuration.</strong> Leave <code>SMTP_HOST</code> empty to disable email sending. Notifications are still created in the database and visible in the in-app center.</div>
+        </li>
+        <li>
+          <span class="limit-num">3</span>
+          <div><strong>Azure Blob Storage requires an Azure account.</strong> Set <code>USE_LOCAL_STORAGE=false</code> and provide <code>AZURE_STORAGE_CONNECTION_STRING</code>. Local filesystem storage is used by default for development.</div>
+        </li>
+        <li>
+          <span class="limit-num">4</span>
+          <div><strong>APScheduler runs in-process.</strong> In a multi-worker deployment (gunicorn), the background scheduler runs in every worker. Use <code>--workers 1</code> or migrate to an external task queue (Celery + Redis) for production.</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROJECT STRUCTURE -->
+  <section id="structure">
+    <h2>
+      <span class="icon" style="background:#f0fdf4;">📁</span>
+      Project Structure
+    </h2>
+    <div class="code-block"><span class="comment">aicte-complaint-dashboard/</span>
+├── frontend/
+│   ├── src/
+│   │   ├── <span class="val">api/</span>          <span class="comment"># TanStack Query API clients</span>
+│   │   ├── <span class="val">components/</span>   <span class="comment"># Shared UI components</span>
+│   │   ├── <span class="val">contexts/</span>     <span class="comment"># React contexts (auth, etc.)</span>
+│   │   ├── <span class="val">hooks/</span>        <span class="comment"># Custom React hooks</span>
+│   │   ├── <span class="val">layouts/</span>      <span class="comment"># Page layout wrappers</span>
+│   │   ├── <span class="val">pages/</span>        <span class="comment"># 15 application pages</span>
+│   │   ├── <span class="val">routes/</span>       <span class="comment"># React Router config</span>
+│   │   └── <span class="val">types/</span>        <span class="comment"># TypeScript type definitions</span>
+│   ├── index.html
+│   ├── vite.config.ts
+│   └── tailwind.config.ts
+│
+├── backend/
+│   ├── app/
+│   │   ├── <span class="val">api/</span>          <span class="comment"># FastAPI route handlers</span>
+│   │   ├── <span class="val">core/</span>         <span class="comment"># Auth, config, security</span>
+│   │   ├── <span class="val">db/</span>           <span class="comment"># Database session + seed script</span>
+│   │   ├── <span class="val">models/</span>       <span class="comment"># SQLAlchemy ORM models</span>
+│   │   ├── <span class="val">schemas/</span>      <span class="comment"># Pydantic request/response schemas</span>
+│   │   ├── <span class="val">services/</span>     <span class="comment"># Business logic layer</span>
+│   │   ├── <span class="val">matching/</span>     <span class="comment"># Overlap detection engine</span>
+│   │   └── <span class="val">tasks/</span>        <span class="comment"># APScheduler background jobs</span>
+│   ├── migrations/         <span class="comment"># Alembic migration scripts</span>
+│   ├── tests/              <span class="comment"># 9 test files</span>
+│   ├── requirements.txt
+│   └── alembic.ini
+│
+├── docker-compose.yml
+├── .env.example
+├── start_backend.bat       <span class="comment"># Windows quick-start (conda)</span>
+├── start_frontend.bat      <span class="comment"># Windows quick-start (npm)</span>
+└── README.md</div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>AICTE Integrated Institution Complaint Monitoring and Status Dashboard</strong><br>
+  <span>DEMO DATA — Not actual AICTE records. For development and evaluation purposes only.</span>
+</footer>
+
+</body>
+</html>
